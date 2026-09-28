@@ -1,17 +1,25 @@
 import { useEffect, useState } from "react";
+import { PenLineIcon } from "lucide-react";
 import { getPublishedPosts } from "../lib/api.js";
 import BlogHoverList from "../components/BlogHoverList.jsx";
 import Footer from "../components/Footer.jsx";
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "../components/ui/empty.jsx";
 
 export default function Blog() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getPublishedPosts().then((data) => {
-      setPosts(data);
-      setLoading(false);
-    });
+    getPublishedPosts()
+      .then((data) => setPosts(data))
+      .catch(() => setPosts([]))
+      .finally(() => setLoading(false));
   }, []);
 
   if (loading) {
@@ -25,7 +33,17 @@ export default function Blog() {
 
         <div className="mt-8">
           {posts.length === 0 ? (
-            <p className="text-sm text-muted">No posts yet.</p>
+            <Empty>
+              <EmptyHeader>
+                <EmptyMedia variant="icon">
+                  <PenLineIcon />
+                </EmptyMedia>
+                <EmptyTitle>The archive is still taking shape.</EmptyTitle>
+                <EmptyDescription>
+                  More writing is forthcoming.
+                </EmptyDescription>
+              </EmptyHeader>
+            </Empty>
           ) : (
             <BlogHoverList posts={posts} />
           )}

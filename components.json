@@ -18,6 +18,7 @@
     "hooks": "@/hooks"
   },
   "registries": {
-    "@uselayouts": "https://uselayouts.com/r/{name}"
+    "@uselayouts": "https://uselayouts.com/r/{name}",
+    "@coss": "https://coss.com/ui/r/{name}.json"
   }
 }
