@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav.jsx";
 import Hero from "./components/Hero.jsx";
 import ContactSection from "./components/ContactSection.jsx";
@@ -29,7 +29,7 @@ function Home() {
 
 export default function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <HashRouter>
       <main className="min-h-screen bg-paper">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -62,6 +62,6 @@ export default function App() {
           />
         </Routes>
       </main>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
