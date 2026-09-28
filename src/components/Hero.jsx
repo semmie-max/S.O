@@ -7,10 +7,7 @@ const PROFILE = {
   title: "Social Media Manager & Content Strategist",
   bio: "Playing the algorithm without letting it play me.",
   initials: "SO",
-  // Drop a photo at public/avatar.jpg (any image works — just keep this
-  // filename, or update the path below to match). Until that file exists,
-  // the initials badge below renders instead, so the page never breaks.
-  avatarSrc: "/avatar.jpg",
+  avatarSrc: `${import.meta.env.BASE_URL}avatar.jpg`,
 };
 
 function Avatar() {
@@ -19,8 +16,8 @@ function Avatar() {
   if (imageFailed) {
     return (
       <div
-        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-sm font-semibold text-white"
-        style={{ background: "linear-gradient(135deg, #2B4FC7 0%, #141312 100%)" }}
+        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md text-sm font-semibold text-white"
+        style={{ background: "linear-gradient(135deg, #4A453F 0%, #141312 100%)" }}
       >
         {PROFILE.initials}
       </div>
@@ -32,7 +29,7 @@ function Avatar() {
       src={PROFILE.avatarSrc}
       alt={PROFILE.name}
       onError={() => setImageFailed(true)}
-      className="h-11 w-11 shrink-0 rounded-md object-cover"
+      className="h-14 w-14 shrink-0 rounded-md object-cover"
     />
   );
 }
@@ -53,7 +50,7 @@ export default function Hero() {
       </div>
 
       <p className="mt-4 text-[14px] leading-relaxed text-muted">
-        Playing the <span className="font-semibold text-ink underline">algorithm</span> without letting it play me.
+        Navigating the <span className="font-semibold text-ink underline">algorithm</span> without losing the plot.
       </p>
     </section>
   );

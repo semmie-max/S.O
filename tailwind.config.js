@@ -9,7 +9,7 @@ export default {
         muted: "#6B6660",
         line: "#E7E3DC",
         paper: "#FFFFFF",
-        accent: "#2B4FC7",
+        accent: "#312f2c",
         border: "hsl(var(--border))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -17,6 +17,7 @@ export default {
       fontFamily: {
         display: ["Fraunces", "ui-serif", "Georgia", "serif"],
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        signature: ['"Dancing Script"', "cursive"],
       },
     },
   },

@@ -53,14 +53,14 @@ export default function WorksSection() {
         >
           {WORKS.buildingName}
         </a>
-        , {WORKS.buildingDescription}. {WORKS.closingText} Explore my work:{" "}
+        , {WORKS.buildingDescription}. {WORKS.closingText} Explore my {" "}
         
         <a  href={WORKS.linkHref}
           target="_blank"
           rel="noreferrer"
           className="font-semibold text-ink underline hover:text-accent"
         >
-          {WORKS.linkLabel}
+          Works
         </a>
       </p>
     </section>

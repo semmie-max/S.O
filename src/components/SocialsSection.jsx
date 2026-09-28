@@ -3,7 +3,7 @@ const SOCIALS = {
   twitterHref: "https://x.com/your-handle",
   githubHref: "https://github.com/your-handle",
   spotifyHref: "https://open.spotify.com/user/your-handle",
-  linkedinHref: "https://linkedin.com/in/your-handle",
+  linkedinHref: "https://www.linkedin.com/in/saraholotin?utm_source=share_via&utm_content=profile&utm_medium=member_android",
   twitchHref: "https://twitch.tv/your-handle",
 };
 
@@ -16,52 +16,34 @@ export default function SocialsSection() {
       </h2>
 
       <p className="mt-4 text-[14px] leading-relaxed text-muted">
-        The best way to follow my work and thoughts is through{" "}
+        Have something in mind? I’m always open to good ideas, interesting projects, and conversations that could become something more. Reach me via{" "}
         
-         <a href={SOCIALS.twitterHref}
+         <a href={"mailto:saraholotin@gmail.com"}
           target="_blank"
           rel="noreferrer"
           className="font-semibold italic text-ink underline hover:text-accent"
         >
-          X/Twitter
+          Gmail 
         </a>
-        , where I actively share my development journey, from technical insights to project updates, or explore them on{" "}
+        , find me on{" "}
         
-        <a  href={SOCIALS.githubHref}
+        <a  href={SOCIALS.linkedinHref}
           target="_blank"
           rel="noreferrer"
           className="font-semibold italic text-ink underline hover:text-accent"
         >
-          GitHub
+          Linkedin
         </a>
-        , where you'll find messy late-night commits, half-finished experiments, and a few things I'm actually proud of. And because life without music would be unimaginable, you can also check out my playlists on{" "}
+        , or{" "}
         
          <a href={SOCIALS.spotifyHref}
           target="_blank"
           rel="noreferrer"
           className="font-semibold italic text-ink underline hover:text-accent"
         >
-          Spotify
+          Schedule a meeting
         </a>
-        . I'm also on a platform that I don't like so much,{" "}
-        
-         <a href={SOCIALS.linkedinHref}
-          target="_blank"
-          rel="noreferrer"
-          className="font-semibold italic text-ink underline hover:text-accent"
-        >
-          LinkedIn
-        </a>
-        . Oh! And I recently started streaming on{" "}
-        
-         <a href={SOCIALS.twitchHref}
-          target="_blank"
-          rel="noreferrer"
-          className="font-semibold italic text-ink underline hover:text-accent"
-        >
-          Twitch
-        </a>
-        !
+        .if you’d rather put a time on the calendar.
       </p>
     </section>
   );
