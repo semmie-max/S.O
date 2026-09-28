@@ -1,11 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { createPost, updatePost, getPostByIdAdmin } from "../lib/api.js";
+
+const MARKERS = {
+  bold: ["**", "**"],
+  italic: ["*", "*"],
+  underline: ["<u>", "</u>"],
+};
+const NO_VALUE = [];
 
 export default function AdminEditor() {
   const { id } = useParams();
   const isEditing = Boolean(id);
   const navigate = useNavigate();
+  const textareaRef = useRef(null);
 
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
@@ -27,6 +37,24 @@ export default function AdminEditor() {
       });
     }
   }, [id, isEditing]);
+
+  function applyFormat(type) {
+    const el = textareaRef.current;
+    if (!el) return;
+
+    const { selectionStart: start, selectionEnd: end } = el;
+    const [open, close] = MARKERS[type];
+    const selected = content.slice(start, end);
+
+    setContent(
+      content.slice(0, start) + open + selected + close + content.slice(end)
+    );
+
+    requestAnimationFrame(() => {
+      el.focus();
+      el.setSelectionRange(start + open.length, end + open.length);
+    });
+  }
 
   async function handleSave(status) {
     setError("");
@@ -96,13 +124,44 @@ export default function AdminEditor() {
           />
         </div>
 
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Write your post..."
-          rows={14}
-          className="w-full rounded-md border border-line px-3 py-2 text-sm text-ink outline-none focus:border-accent"
-        />
+        <div>
+          <ToggleGroup
+            value={NO_VALUE}
+            onMouseDown={(e) => e.preventDefault()}
+            className="mb-2"
+          >
+            <ToggleGroupItem
+              aria-label="Bold"
+              value="bold"
+              onClick={() => applyFormat("bold")}
+            >
+              <BoldIcon />
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              aria-label="Italic"
+              value="italic"
+              onClick={() => applyFormat("italic")}
+            >
+              <ItalicIcon />
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              aria-label="Underline"
+              value="underline"
+              onClick={() => applyFormat("underline")}
+            >
+              <UnderlineIcon />
+            </ToggleGroupItem>
+          </ToggleGroup>
+
+          <textarea
+            ref={textareaRef}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Write your post..."
+            rows={14}
+            className="w-full rounded-md border border-line px-3 py-2 text-sm text-ink outline-none focus:border-accent"
+          />
+        </div>
 
         <label className="flex items-center gap-2 text-sm text-ink">
           <input
