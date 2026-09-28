@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAllPostsAdmin, deletePost, clearToken } from "../lib/api.js";
+import DeleteButton from "../components/DeleteButton.jsx";
 
 export default function AdminDashboard() {
   const [posts, setPosts] = useState([]);
@@ -12,16 +13,14 @@ export default function AdminDashboard() {
   }, []);
 
   async function loadPosts() {
-    setLoading(true);
     const data = await getAllPostsAdmin();
     setPosts(data);
     setLoading(false);
   }
 
   async function handleDelete(id) {
-    if (!confirm("Delete this post permanently?")) return;
     await deletePost(id);
-    loadPosts();
+    setPosts((prev) => prev.filter((p) => p.id !== id));
   }
 
   function handleLogout() {
@@ -66,19 +65,14 @@ export default function AdminDashboard() {
                 {post.status} · {new Date(post.created_at).toLocaleDateString()}
               </p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex items-center gap-3">
               <Link
                 to={`/sb-portal-x7k2/edit/${post.id}`}
                 className="text-sm text-ink underline"
               >
                 Edit
               </Link>
-              <button
-                onClick={() => handleDelete(post.id)}
-                className="text-sm text-red-600 underline"
-              >
-                Delete
-              </button>
+              <DeleteButton onDelete={() => handleDelete(post.id)} />
             </div>
           </div>
         ))}
