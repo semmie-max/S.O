@@ -3,6 +3,30 @@ import { useNavigate, useParams } from "react-router-dom";
 import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { createPost, updatePost, getPostByIdAdmin } from "../lib/api.js";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
+import remarkBreaks from "remark-breaks";
+
+const sanitizeSchema = {
+  ...defaultSchema,
+  tagNames: [...(defaultSchema.tagNames || []), "u"],
+};
+
+// same spacing as the blog post page, so the preview matches
+const mdComponents = {
+  p: ({ node, ...props }) => <p className="mt-4 first:mt-0" {...props} />,
+  a: ({ node, ...props }) => <a className="underline" {...props} />,
+  h2: ({ node, ...props }) => (
+    <h2 className="mt-6 text-lg font-semibold" {...props} />
+  ),
+  ul: ({ node, ...props }) => (
+    <ul className="mt-4 list-disc pl-5" {...props} />
+  ),
+  ol: ({ node, ...props }) => (
+    <ol className="mt-4 list-decimal pl-5" {...props} />
+  ),
+};
 
 const MARKERS = {
   bold: ["**", "**"],
@@ -25,6 +49,7 @@ export default function AdminEditor() {
   const [existingImageUrl, setExistingImageUrl] = useState(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [showPreview, setShowPreview] = useState(false);
 
   useEffect(() => {
     if (isEditing) {
@@ -125,42 +150,66 @@ export default function AdminEditor() {
         </div>
 
         <div>
-          <ToggleGroup
-            value={NO_VALUE}
-            onMouseDown={(e) => e.preventDefault()}
-            className="mb-2"
-          >
-            <ToggleGroupItem
-              aria-label="Bold"
-              value="bold"
-              onClick={() => applyFormat("bold")}
+          <div className="mb-2 flex items-center justify-between">
+            <ToggleGroup
+              value={NO_VALUE}
+              onMouseDown={(e) => e.preventDefault()}
             >
-              <BoldIcon />
-            </ToggleGroupItem>
-            <ToggleGroupItem
-              aria-label="Italic"
-              value="italic"
-              onClick={() => applyFormat("italic")}
-            >
-              <ItalicIcon />
-            </ToggleGroupItem>
-            <ToggleGroupItem
-              aria-label="Underline"
-              value="underline"
-              onClick={() => applyFormat("underline")}
-            >
-              <UnderlineIcon />
-            </ToggleGroupItem>
-          </ToggleGroup>
+              <ToggleGroupItem
+                aria-label="Bold"
+                value="bold"
+                disabled={showPreview}
+                onClick={() => applyFormat("bold")}
+              >
+                <BoldIcon />
+              </ToggleGroupItem>
+              <ToggleGroupItem
+                aria-label="Italic"
+                value="italic"
+                disabled={showPreview}
+                onClick={() => applyFormat("italic")}
+              >
+                <ItalicIcon />
+              </ToggleGroupItem>
+              <ToggleGroupItem
+                aria-label="Underline"
+                value="underline"
+                disabled={showPreview}
+                onClick={() => applyFormat("underline")}
+              >
+                <UnderlineIcon />
+              </ToggleGroupItem>
+            </ToggleGroup>
 
-          <textarea
-            ref={textareaRef}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Write your post..."
-            rows={14}
-            className="w-full rounded-md border border-line px-3 py-2 text-sm text-ink outline-none focus:border-accent"
-          />
+            <button
+              type="button"
+              onClick={() => setShowPreview((v) => !v)}
+              className="text-sm text-ink underline"
+            >
+              {showPreview ? "Edit" : "Preview"}
+            </button>
+          </div>
+
+          {showPreview ? (
+            <div className="min-h-[20rem] w-full rounded-md border border-line px-3 py-2 text-sm leading-relaxed text-ink">
+              <ReactMarkdown
+                remarkPlugins={[remarkBreaks]}
+                rehypePlugins={[rehypeRaw, [rehypeSanitize, sanitizeSchema]]}
+                components={mdComponents}
+              >
+                {content || "Nothing to preview yet."}
+              </ReactMarkdown>
+            </div>
+          ) : (
+            <textarea
+              ref={textareaRef}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Write your post..."
+              rows={14}
+              className="w-full rounded-md border border-line px-3 py-2 text-sm text-ink outline-none focus:border-accent"
+            />
+          )}
         </div>
 
         <label className="flex items-center gap-2 text-sm text-ink">
