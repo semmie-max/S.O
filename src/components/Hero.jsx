@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TextCharSlide } from "@/components/ui/text-char-slide";
 
 
 // EDIT ME — swap in your own name, title, and one-line bio.
@@ -40,9 +41,14 @@ export default function Hero() {
       <div className="flex items-center gap-3">
         <Avatar />
         <div>
-          <h1 className="font-display text-[17px] font-semibold leading-tight text-ink">
-            {PROFILE.name}
-          </h1>
+          <TextCharSlide
+            as="h1"
+            text={PROFILE.name}
+            by="character"
+            animation="slideLeft"
+            duration={0.6}
+            className="font-display text-[17px] font-semibold leading-tight text-ink"
+          />
           <p className="font-display italic text-[15px] font-medium leading-tight text-accent">
             {PROFILE.title}
           </p>
