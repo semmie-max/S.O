@@ -28,35 +28,35 @@ export default function WritingSection() {
   }, []);
 
   return (
-    <section className="mx-auto w-full max-w-2xl px-6 pb-16 sm:px-8">
-      <h2 className="relative font-display text-2xl italic text-accent">
-        Writing<span className="text-ink">.</span>
-        <sup className="ml-0.5 font-display text-lg italic text-accent">2</sup>
+    <section className="mx-auto w-full max-w-3xl px-6 pb-20 sm:px-8">
+      <h2 className="relative font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+        Writing.
+        <sup className="ml-0.5 font-display text-lg font-bold italic text-accent">2</sup>
       </h2>
 
       {status === "loading" && (
-        <p className="mt-4 text-[14px] italic text-muted">Loading…</p>
+        <p className="mt-5 text-[16px] leading-[1.75] text-muted sm:text-[17px]">Loading…</p>
       )}
 
       {status === "error" && (
-        <p className="mt-4 text-[14px] italic text-muted">
+        <p className="mt-5 text-[16px] leading-[1.75] text-muted sm:text-[17px]">
           Couldn't load posts right now.
         </p>
       )}
 
       {status === "ready" && posts.length === 0 && (
-        <p className="mt-4 text-[14px] italic text-muted">
+        <p className="mt-5 text-[16px] leading-[1.75] text-muted sm:text-[17px]">
           Currently between drafts.
         </p>
       )}
 
       {status === "ready" && posts.length > 0 && (
-        <ul className="mt-4 space-y-3">
+        <ul className="mt-5 space-y-3">
           {posts.map((post) => (
             <li key={post.id}>
               <Link
                 to={`/blog/${post.slug}`}
-                className="text-[14px] italic leading-relaxed text-muted transition-colors hover:text-ink"
+                className="text-[16px] leading-[1.75] text-muted transition-colors hover:text-ink sm:text-[17px]"
               >
                 {post.title}
               </Link>
@@ -67,7 +67,7 @@ export default function WritingSection() {
 
       <Link
         to="/blog"
-        className="mt-5 inline-block font-display text-[13px] italic text-muted underline underline-offset-2 hover:text-accent"
+        className="relative mt-6 inline-block text-[11px] font-medium uppercase tracking-[0.2em] text-muted transition-colors after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-ink after:transition-transform after:duration-300 hover:text-ink hover:after:scale-x-100"
       >
         See more
       </Link>

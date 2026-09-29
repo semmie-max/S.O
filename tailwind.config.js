@@ -5,11 +5,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: "#141312",
-        muted: "#6B6660",
-        line: "#E7E3DC",
-        paper: "#FFFFFF",
-        accent: "#312f2c",
+        ink: "rgb(var(--ink) / <alpha-value>)",
+        muted: "rgb(var(--muted) / <alpha-value>)",
+        line: "rgb(var(--line) / <alpha-value>)",
+        paper: "rgb(var(--paper) / <alpha-value>)",
+        accent: "rgb(var(--accent) / <alpha-value>)",
         border: "hsl(var(--border))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

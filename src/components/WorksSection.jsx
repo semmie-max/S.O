@@ -18,19 +18,19 @@ const WORKS = {
 
 export default function WorksSection() {
   return (
-    <section className="mx-auto w-full max-w-2xl px-6 pb-16 sm:px-8">
-      <h2 className="relative font-display text-2xl italic text-accent">
-        Works<span className="text-ink">.</span>
-        <sup className="ml-0.5 font-display text-lg italic text-accent">1</sup>
+    <section className="mx-auto w-full max-w-3xl px-6 pb-20 sm:px-8">
+      <h2 className="relative font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+                Works.
+        <sup className="ml-0.5 font-display text-lg font-bold italic text-accent">1</sup>
       </h2>
 
-      <p className="mt-4 text-[14px] leading-relaxed text-muted">
+      <p className="mt-5 max-w-[62ch] text-[16px] leading-[1.75] text-muted sm:text-[17px]">
         Working on{" "}
         
          <a href={WORKS.itemOneHref}
           target="_blank"
           rel="noreferrer"
-          className="font-semibold italic text-ink underline hover:text-accent"
+          className="font-semibold text-ink underline decoration-ink/40 decoration-1 underline-offset-4 transition-colors hover:decoration-ink"
         >
           {WORKS.itemOne}
         </a>{" "}
@@ -39,17 +39,17 @@ export default function WorksSection() {
          <a href={WORKS.itemTwoHref}
           target="_blank"
           rel="noreferrer"
-          className="font-semibold italic text-ink underline hover:text-accent"
+          className="font-semibold text-ink underline decoration-ink/40 decoration-1 underline-offset-4 transition-colors hover:decoration-ink"
         >
           {WORKS.itemTwo}
         </a>
         , while building{" "}
-        <Sparkles className="mb-[2px] inline h-[14px] w-[14px] text-accent" strokeWidth={1.75} />{" "}
+        <Sparkles className="mb-[2px] inline h-[16px] w-[16px] text-accent" strokeWidth={1.75} />{" "}
         
         <a  href={WORKS.buildingHref}
           target="_blank"
           rel="noreferrer"
-          className="font-semibold italic text-ink underline hover:text-accent"
+          className="font-semibold text-ink underline decoration-ink/40 decoration-1 underline-offset-4 transition-colors hover:decoration-ink"
         >
           {WORKS.buildingName}
         </a>
@@ -58,7 +58,7 @@ export default function WorksSection() {
         <a  href={WORKS.linkHref}
           target="_blank"
           rel="noreferrer"
-          className="font-semibold text-ink underline hover:text-accent"
+          className="font-semibold text-ink underline decoration-ink/40 decoration-1 underline-offset-4 transition-colors hover:decoration-ink"
         >
           Works
         </a>

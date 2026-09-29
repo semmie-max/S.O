@@ -1,11 +1,11 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav.jsx";
 import Hero from "./components/Hero.jsx";
-import ContactSection from "./components/ContactSection.jsx";
 import WorksSection from "./components/WorksSection.jsx";
 import WritingSection from "./components/WritingSection.jsx";
 import SocialsSection from "./components/SocialsSection.jsx";
 import Footer from "./components/Footer.jsx";
+import ThemeToggle from "./components/ThemeToggle.jsx";
 import Blog from "./pages/Blog.jsx";
 import BlogPost from "./pages/BlogPost.jsx";
 import AdminLogin from "./pages/AdminLogin.jsx";
@@ -18,7 +18,6 @@ function Home() {
     <>
       <Nav />
       <Hero />
-      <ContactSection />
       <WorksSection />
       <WritingSection />
       <SocialsSection />
@@ -31,6 +30,7 @@ export default function App() {
   return (
     <HashRouter>
       <main className="min-h-screen bg-paper">
+        <ThemeToggle />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<Blog />} />

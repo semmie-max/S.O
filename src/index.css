@@ -9,6 +9,12 @@
     --background: 0 0% 100%;
     --foreground: 20 5% 8%;
     --border: 30 12% 89%;
+
+    --ink: 20 19 18;
+    --muted: 107 102 96;
+    --line: 231 227 220;
+    --paper: 255 255 255;
+    --accent: 49 47 44;
   }
 }
 
@@ -17,8 +23,8 @@ html {
 }
 
 body {
-  background-color: #ffffff;
-  color: #141312;
+  background-color: rgb(var(--paper));
+  color: rgb(var(--ink));
   font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -26,4 +32,33 @@ body {
 ::selection {
   background-color: #2b4fc7;
   color: #ffffff;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(-18deg);
+  }
+  50% {
+    transform: rotate(18deg);
+  }
+}
+
+.wave-hand {
+  transform-origin: 70% 90%;
+  animation: wave 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave-hand {
+    animation: none;
+  }
+}
+
+html[data-theme="dark"] {
+  --ink: 245 245 245;
+  --muted: 163 163 163;
+  --line: 38 38 38;
+  --paper: 10 10 10;
+  --accent: 212 212 212;
 }
